@@ -1789,7 +1789,7 @@
             if (text.includes('333')) easterEgg('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt6POGYUorrLfX6x9suR7rIR_UTos7zI6bBFiAH_I35GQD-NGAoF8XxNHz&s=10');
             if (text.includes('1488')) easterEgg('https://s1.15min.lt/static/cache/OTcweDU4MCwzNzR4MTIyLDU5NzI2MSxvcmlnaW5hbCwsaWQ9MTI3MDE2JmRhdGU9MjAwOSUyRjExJTJGMjEsMjAzMDU4MjU2Mw==/1258839524adolfashitleris.jpg');
             if (text.includes('67')) easterEgg('https://i.ytimg.com/vi/N_fNNf8lt-M/maxresdefault.jpg');
-            if (text.includes('cat')) easterEgg('https://s.yimg.com/ny/api/res/1.2/0Rom4OHMmU3mIXx.YSsr2g--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTEwODM7Y2Y9d2VicA--/https://media.zenfs.com/en/know_your_meme_909/406969be491db90685e669f64ce62917');
+            if (text.includes('cat') || text.includes('кот') || text.includes('кошк') || text.includes('котост')) easterEgg('https://s.yimg.com/ny/api/res/1.2/0Rom4OHMmU3mIXx.YSsr2g--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTEwODM7Y2Y9d2VicA--/https://media.zenfs.com/en/know_your_meme_909/406969be491db90685e669f64ce62917');
         }
         if (addBtn) addBtn.addEventListener('click', addNote);
         if (noteInp) noteInp.addEventListener('keydown', e => { if (e.key === 'Enter') addNote(); });
@@ -1797,7 +1797,8 @@
         // YouTube API — сохранение ключа
         const ytKeyInput = document.getElementById('ytApiKey');
         if (ytKeyInput) {
-            ytKeyInput.value = localStorage.getItem('ytApiKey') || 'AIzaSyA8zowhzRL2BbU3j1tSzKz-s52RKpcKg7I';
+            if (!localStorage.getItem('ytApiKey')) localStorage.setItem('ytApiKey', 'AIzaSyA8zowhzRL2BbU3j1tSzKz-s52RKpcKg7I');
+            ytKeyInput.value = localStorage.getItem('ytApiKey');
             ytKeyInput.addEventListener('input', () => localStorage.setItem('ytApiKey', ytKeyInput.value.trim()));
         }
 
