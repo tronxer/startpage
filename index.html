@@ -518,23 +518,22 @@
         .shorts-body .shorts-frame iframe { width: 100%; height: 100%; border: none; }
         .shorts-body .shorts-frame iframe { width: 100%; height: 100%; border: none; }
         .shorts-overlay {
-            position: absolute; z-index: 2; cursor: pointer; opacity: 0.6; transition: opacity 0.3s;
-            color: rgba(255,255,255,0.8); filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
+            position: absolute; z-index: 2; cursor: pointer; opacity: 0.7; transition: opacity 0.3s;
+            color: #fff; filter: drop-shadow(0 0 6px rgba(0,0,0,0.6));
         }
-        .shorts-frame:hover .shorts-overlay { opacity: 1; }
-        .shorts-overlay svg { width: 28px; height: 28px; }
-        #shortsSound { bottom: 16px; left: 16px; }
-        #shortsSound.muted { opacity: 1; color: rgba(255,255,255,0.4); }
+        .shorts-overlay svg { width: 26px; height: 26px; }
+        #shortsSound { bottom: 16px; right: 50%; margin-right: 40px; }
+        #shortsSound.muted { opacity: 0.4; }
         .shorts-like {
-            bottom: 60px; left: 16px;
-            display: flex; flex-direction: column; align-items: center; gap: 2px;
+            right: 10px; bottom: 50%; margin-bottom: 20px;
+            display: flex; flex-direction: column; align-items: center; gap: 3px;
         }
-        .shorts-like span { font-size: 0.7rem; color: rgba(255,255,255,0.6); }
+        .shorts-like span { font-size: 0.65rem; color: rgba(255,255,255,0.7); }
         .shorts-like.liked svg { color: #ff4d4d; }
         .shorts-nav {
-            position: absolute; z-index: 3; cursor: pointer; transition: opacity 0.3s;
-            top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.5);
-            opacity: 1; animation: fadeNav 3s ease forwards;
+            position: absolute; z-index: 3; cursor: pointer;
+            top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.3);
+            transition: opacity 0.3s; opacity: 0; animation: fadeNav 3s ease forwards;
         }
         .shorts-nav:hover { opacity: 1 !important; animation: none; }
         .shorts-frame:hover .shorts-nav { opacity: 1; animation: none; }
@@ -542,72 +541,44 @@
         .shorts-nav svg { width: 28px; height: 28px; filter: drop-shadow(0 0 4px rgba(0,0,0,0.5)); }
         #shortsPrev { left: 4px; }
         .shorts-nav-next { right: 4px; }
-        .shorts-swipe-overlay {
-            position: absolute; z-index: 3; inset: 0;
-            touch-action: none;
-        }
 
-        .shorts-trigger {
-            position: fixed;
-            left: 14px;
-            top: 50%;
+        .shorts-panel-trigger {
+            position: absolute; top: 50%; right: -34px; z-index: 5;
             transform: translateY(-50%);
-            z-index: 91;
-            width: 34px;
-            height: 34px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            transition: opacity 0.3s, background 0.3s, border-color 0.3s;
-            user-select: none;
-            opacity: 0.7;
+            width: 34px; height: 34px;
+            cursor: pointer; user-select: none;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 0 10px 10px 0;
             background: rgba(20, 20, 30, 0.25);
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
             border: 1.5px solid rgba(255,255,255,0.3);
-            color: #fff;
-        }
-        .shorts-trigger:hover { opacity: 1; background: rgba(20, 20, 30, 0.4); border-color: rgba(255,255,255,0.6); }
-        .shorts-trigger svg { width: 18px; height: 18px; transition: transform 0.3s; }
-        .shorts-panel.open ~ .shorts-trigger svg { transform: rotate(180deg); }
-
-        .notes-trigger {
-            position: fixed;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 91;
-            width: 34px;
-            height: 34px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
+            border-left: none;
+            color: #fff; opacity: 0.7;
             transition: opacity 0.3s, background 0.3s, border-color 0.3s;
-            user-select: none;
-            opacity: 0.7;
+        }
+        .shorts-panel-trigger:hover { opacity: 1; background: rgba(20, 20, 30, 0.4); border-color: rgba(255,255,255,0.6); }
+        .shorts-panel-trigger svg { width: 18px; height: 18px; transition: transform 0.3s; }
+        .shorts-panel.open .shorts-panel-trigger svg { transform: rotate(180deg); }
+
+        .notes-panel-trigger {
+            position: absolute; top: 50%; left: -34px; z-index: 5;
+            transform: translateY(-50%);
+            width: 34px; height: 34px;
+            cursor: pointer; user-select: none;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 10px 0 0 10px;
             background: rgba(20, 20, 30, 0.25);
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
             border: 1.5px solid rgba(255,255,255,0.3);
-            color: #fff;
+            border-right: none;
+            color: #fff; opacity: 0.7;
+            transition: opacity 0.3s, background 0.3s, border-color 0.3s;
         }
-        .notes-trigger:hover {
-            opacity: 1;
-            background: rgba(20, 20, 30, 0.4);
-            border-color: rgba(255,255,255,0.6);
-        }
-        .notes-trigger svg {
-            width: 18px;
-            height: 18px;
-            transition: transform 0.3s;
-        }
-        .notes-panel.open ~ .notes-trigger svg {
-            transform: rotate(180deg);
-        }
+        .notes-panel-trigger:hover { opacity: 1; background: rgba(20, 20, 30, 0.4); border-color: rgba(255,255,255,0.6); }
+        .notes-panel-trigger svg { width: 18px; height: 18px; transition: transform 0.3s; }
+        .notes-panel.open .notes-panel-trigger svg { transform: rotate(180deg); }
         .notes-body h3 {
             color: rgba(255,255,255,0.7);
             font-weight: 300;
@@ -761,6 +732,9 @@
 
     <audio id="customMusicAudio" loop style="display:none"></audio>
     <div class="shorts-panel" id="shortsPanel">
+        <div class="shorts-panel-trigger" id="shortsTrigger">
+            <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <div class="shorts-body">
             <div class="shorts-frame" id="shortsFrame">
                 <iframe id="shortsPlayer" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -773,14 +747,13 @@
                 </div>
                 <div class="shorts-nav" id="shortsPrev"><svg viewBox="0 0 24 24"><path d="M7 6v12h2V6H7zm10 0l-6 6 6 6V6z" fill="currentColor"/></svg></div>
                 <div class="shorts-nav shorts-nav-next" id="shortsNext"><svg viewBox="0 0 24 24"><path d="M17 6v12h-2V6h2zm-10 0l6 6-6 6V6z" fill="currentColor"/></svg></div>
-                <div class="shorts-swipe-overlay" id="shortsSwipe"></div>
             </div>
         </div>
     </div>
-    <div class="shorts-trigger" id="shortsTrigger">
-        <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
     <div class="notes-panel" id="notesPanel">
+        <div class="notes-panel-trigger" id="notesTrigger">
+            <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <div class="notes-body">
             <h3>Заметки</h3>
             <div class="notes-input-row">
@@ -800,10 +773,6 @@
             </div>
         </div>
     </div>
-    <div class="notes-trigger" id="notesTrigger">
-        <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-
     <!-- Наша секретная ссылка-невидимка -->
     <a id="hiddenLink" href=""></a>
 
@@ -1847,7 +1816,7 @@
             const id = shortsList[shortsIdx];
             const player = document.getElementById('shortsPlayer');
             const mute = localStorage.getItem('shortsMuted') !== 'false';
-            player.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=' + (autoplay ? 1 : 0) + '&mute=' + (mute ? 1 : 0) + '&loop=1&playlist=' + id + '&controls=1&modestbranding=1&rel=0';
+            player.src = 'https://www.youtube.com/embed/' + id + '?autoplay=' + (autoplay ? 1 : 0) + '&mute=' + (mute ? 1 : 0) + '&loop=1&playlist=' + id + '&controls=1&modestbranding=1&rel=0';
             updateShortsUI();
             // Сброс анимации кнопок
             document.querySelectorAll('.shorts-nav').forEach(el => {
@@ -1888,25 +1857,6 @@
         document.getElementById('shortsPrev').addEventListener('click', shortsPrev);
         document.getElementById('shortsNext').addEventListener('click', shortsNext);
 
-        // Свайп по Shorts (через overlay поверх iframe)
-        let sx = 0, sy = 0;
-        const swipeEl = document.getElementById('shortsSwipe');
-        swipeEl.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; });
-        swipeEl.addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].clientX - sx;
-            const dy = e.changedTouches[0].clientY - sy;
-            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-                if (dx < 0) shortsNext(); else shortsPrev();
-            }
-        });
-        swipeEl.addEventListener('mousedown', e => { sx = e.clientX; sy = e.clientY; e.preventDefault(); });
-        swipeEl.addEventListener('mouseup', e => {
-            const dx = e.clientX - sx;
-            const dy = e.clientY - sy;
-            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-                if (dx < 0) shortsNext(); else shortsPrev();
-            }
-        });
         // Клавиши ← →
         document.addEventListener('keydown', e => {
             if (document.getElementById('shortsPanel').classList.contains('open')) {
