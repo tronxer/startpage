@@ -61,6 +61,8 @@
             -webkit-backdrop-filter: none !important;
             border: none !important;
         }
+        .glass.transparent .btn-left { top: 220px !important; }
+        .glass.transparent .btn-right { top: 220px !important; }
         /* Красивые часы */
         .clock {
             font-size: 5rem;
@@ -514,7 +516,7 @@
             flex-shrink: 0; transition: all 0.3s;
         }
         .shorts-body .shorts-input-row button:hover { background: rgba(255,255,255,0.15); color: #fff; }
-        .shorts-body .shorts-frame { flex: 0 0 auto; align-self: center; width: 100%; max-width: 260px; aspect-ratio: 9/16; border-radius: 10px; overflow: hidden; background: #000; position: relative; }
+        .shorts-body .shorts-frame { flex: 1; border-radius: 10px; overflow: hidden; background: #000; min-height: 0; position: relative; }
         .shorts-body .shorts-frame iframe { width: 100%; height: 100%; border: none; }
         .shorts-body .shorts-frame iframe { width: 100%; height: 100%; border: none; }
         .shorts-overlay {
@@ -530,16 +532,7 @@
         }
         .shorts-like span { font-size: 0.65rem; color: rgba(255,255,255,0.7); }
         .shorts-like.liked svg { color: #ff4d4d; }
-        .shorts-nav {
-            position: absolute; z-index: 3; cursor: pointer;
-            top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.3);
-            transition: opacity 0.3s; opacity: 0; animation: fadeNav 3s ease forwards;
-        }
-        .shorts-nav:hover { opacity: 1 !important; animation: none; }
-        .shorts-frame:hover .shorts-nav { opacity: 1; animation: none; }
-        @keyframes fadeNav { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
-        .shorts-nav svg { width: 28px; height: 28px; filter: drop-shadow(0 0 4px rgba(0,0,0,0.5)); }
-        #shortsNext { right: 4px; }
+
 
         .shorts-panel-trigger {
             position: absolute; top: 50%; right: -34px; z-index: 5;
@@ -599,12 +592,12 @@
     <div class="container">
         <div class="glass" style="position:relative">
             <!-- Кнопки -->
-            <div style="position:absolute;top:16px;left:20px;display:flex;gap:8px;z-index:5">
+            <div class="btn-left" style="position:absolute;top:16px;left:20px;display:flex;gap:8px;z-index:5">
                 <div class="top-btn" id="musicBtn" title="Lo-fi музыка">
                     <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
                 </div>
             </div>
-            <div style="position:absolute;top:16px;right:20px;display:flex;gap:8px;z-index:5">
+            <div class="btn-right" style="position:absolute;top:16px;right:20px;display:flex;gap:8px;z-index:5">
                 <div class="top-btn" id="settingsBtn" title="Настройки">
                     <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></svg>
                 </div>
@@ -744,7 +737,7 @@
                     <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"/></svg>
                     <span id="shortsLikeCount"></span>
                 </div>
-                <div class="shorts-nav" id="shortsNext"><svg viewBox="0 0 24 24"><path d="M17 6v12h-2V6h2zm-10 0l6 6-6 6V6z" fill="currentColor"/></svg></div>
+
             </div>
         </div>
     </div>
@@ -1795,7 +1788,7 @@
             const key = localStorage.getItem('ytApiKey');
             if (!key) return;
             try {
-                const r = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoDuration=short&maxResults=20&regionCode=RU&relevanceLanguage=ru&key=' + key);
+                const r = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoDuration=short&maxResults=30&regionCode=RU&relevanceLanguage=ru&q=shorts&key=' + key);
                 const d = await r.json();
                 console.log('YT API response:', d);
                 if (d.error) { console.warn('YouTube API error:', d.error); return; }
@@ -1815,12 +1808,6 @@
             const mute = localStorage.getItem('shortsMuted') !== 'false';
             player.src = 'https://www.youtube.com/embed/' + id + '?autoplay=' + (autoplay ? 1 : 0) + '&mute=' + (mute ? 1 : 0) + '&loop=1&playlist=' + id + '&controls=1&modestbranding=1&rel=0';
             updateShortsUI();
-            // Сброс анимации кнопок
-            document.querySelectorAll('.shorts-nav').forEach(el => {
-                el.style.animation = 'none';
-                void el.offsetWidth;
-                el.style.animation = '';
-            });
             // Получаем лайки через API
             const key = localStorage.getItem('ytApiKey');
             if (key) {
@@ -1861,14 +1848,18 @@
         });
         document.getElementById('shortsSound').addEventListener('click', toggleShortsMute);
         document.getElementById('shortsLike').addEventListener('click', toggleShortsLike);
-        document.getElementById('shortsNext').addEventListener('click', shortsNext);
 
-        // Клавиши ← →
+        // Клавиши + колёсико мыши
         document.addEventListener('keydown', e => {
             if (document.getElementById('shortsPanel').classList.contains('open')) {
-                if (e.key === 'ArrowRight' || e.key === ' ') shortsNext();
+                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') shortsNext();
             }
         });
+        document.getElementById('shortsPanel').addEventListener('wheel', e => {
+            e.preventDefault();
+            if (e.deltaY > 0) shortsNext();
+            else shortsNext(); // в Shorts только вперёд, но можно и назад если надо
+        }, { passive: false });
 
         // Восстанавливаем кеш
         const cached = localStorage.getItem('shortsCache');
