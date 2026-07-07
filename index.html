@@ -1845,18 +1845,18 @@
             if (document.getElementById('shortsPanel').classList.contains('open')) { loadShorts(true); fetchShorts(); }
         });
 
-        const overlay = document.getElementById('shortsOverlay');
+        const shortsOverlayEl = document.getElementById('shortsOverlay');
         // Свайп мышкой (зажать и тянуть вниз/вверх)
         let dragY = 0;
-        overlay.addEventListener('mousedown', e => { dragY = e.clientY; });
-        overlay.addEventListener('mouseup', e => {
+        shortsOverlayEl.addEventListener('mousedown', e => { dragY = e.clientY; });
+        shortsOverlayEl.addEventListener('mouseup', e => {
             const diff = e.clientY - dragY;
             if (Math.abs(diff) > 30) { if (diff > 0) shortsNext(); else shortsPrev(); }
         });
         // Тач свайп
         let touchY = 0;
-        overlay.addEventListener('touchstart', e => { touchY = e.touches[0].clientY; }, {passive:true});
-        overlay.addEventListener('touchend', e => {
+        shortsOverlayEl.addEventListener('touchstart', e => { touchY = e.touches[0].clientY; }, {passive:true});
+        shortsOverlayEl.addEventListener('touchend', e => {
             const diff = e.changedTouches[0].clientY - touchY;
             if (Math.abs(diff) > 30) { if (diff > 0) shortsNext(); else shortsPrev(); }
         });
@@ -1868,7 +1868,7 @@
             if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'ArrowRight') shortsNext();
             if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') shortsPrev();
         });
-        overlay.addEventListener('wheel', e => {
+        shortsOverlayEl.addEventListener('wheel', e => {
             e.preventDefault();
             if (e.deltaY > 0) shortsNext(); else shortsPrev();
         }, { passive: false });
