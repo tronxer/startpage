@@ -410,6 +410,8 @@
             border-top: 1px solid rgba(255,255,255,0.06);
             padding-top: 10px; margin-top: auto;
         }
+        .dviguha-img { width: 100%; border-radius: 8px; margin-bottom: 6px; display: block; }
+        .war-counter { font-size: 1.1rem; color: rgba(255,255,255,0.55); text-align: center; margin-bottom: 8px; line-height: 1.4; letter-spacing: 1px; font-weight: 300; }
         .rates-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
         .rate-item {
             background: rgba(255,255,255,0.03);
@@ -638,6 +640,8 @@
             </div>
             <ul id="noteList"></ul>
             <div class="rates-section">
+                <img class="dviguha-img" src="https://static.wikia.nocookie.net/mems/images/4/43/Dviguha.png/revision/latest?cb=20260628120110&path-prefix=ru" alt="движуха">
+                <div class="war-counter" id="warCounter">Загрузка...</div>
                 <div class="rates-grid" id="ratesGrid">
                     <div class="rate-item"><div class="rate-pair">💵 USD/RUB</div><div class="rate-value">—</div><div class="rate-sub">₽</div></div>
                     <div class="rate-item"><div class="rate-pair">💵 USD/UAH</div><div class="rate-value">—</div><div class="rate-sub">₴</div></div>
@@ -1670,6 +1674,21 @@
         }
         fetchRates();
         setInterval(fetchRates, 120000);
+
+        // Счётчик времени с начала войны
+        const warStart = new Date(2022, 1, 24); // 24 февраля 2022
+        function updateWarCounter() {
+            const now = new Date();
+            const diff = now - warStart;
+            const totalSec = Math.floor(diff / 1000);
+            const d = Math.floor(totalSec / 86400);
+            const h = Math.floor((totalSec % 86400) / 3600);
+            const m = Math.floor((totalSec % 3600) / 60);
+            const s = totalSec % 60;
+            document.getElementById('warCounter').textContent = '⏳ ' + d + 'д ' + String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+        }
+        updateWarCounter();
+        setInterval(updateWarCounter, 1000);
 
 
 
